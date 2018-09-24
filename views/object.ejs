@@ -1,0 +1,33 @@
+<%- include('header') %>
+
+<h1> Object Listing </h1>
+
+<ul>
+    <table style="max-width:99%;">
+        <tr>
+            <th> Title </th>
+            <th> Image </th>
+            <th> People </th>
+            <th> Object Number </th>
+        </tr>
+        <% objects.forEach(object => { %>
+            <tr style="max-width:240px; padding: 10px; border: 1px solid black;" >
+                <td style="max-width:240px;">
+                    <a href="/object/<%- object.objectnumber %>" > <%- object.title %> </a>
+                </td>
+                <td>
+                    <img src="<%- object.primaryimageurl%>" alt="<%- object.primaryimageurl%>" style="max-width:360px;">
+                </td>
+                <td>
+                        <%- object.people[0].name %>
+
+                </td>
+                <td>
+                    <%- object.objectnumber %>
+                </td>
+            </tr>
+        <% }); %>
+    </table>
+</ul>
+
+<%- include('footer') %>

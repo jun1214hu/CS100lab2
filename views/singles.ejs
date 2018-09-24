@@ -1,0 +1,52 @@
+<%- include('header') %>
+
+<h1> Art Piece </h1>
+
+<ul>
+    <% singles.forEach(single => { %>
+            Title: <%- single.title %>
+        <br>
+        <img src="<%- single.primaryimageurl %>" style="max-width:360px;">
+        <br>
+            People: <%- single.people[0].name %>
+
+        <% }); %>
+</ul>
+
+<h4> Comments </h4>
+<ul>
+    <% users.forEach(function(user) { %>
+        <li> <%- user %> </li>
+   <% }); %>
+</ul>
+
+
+
+
+
+
+<ul>
+<% singles.forEach(single => { %>
+    <div id="respond">
+        <h4> Leave a Comment </h4>
+        <form action="/object/<%- single.objectnumber%>" method="post" id="commentform">
+            <p>
+                <label> Name: </label>
+                <input autocomplete="off" autofocus name="username" type="text">
+            </p>
+            <p>
+                <label> Comment: </label>
+                <input name="comment" type="text">
+            </p>
+            <p>
+                <input value="Add Comment" type="submit">
+            </p>
+        </form>
+    </div>
+<%  }); %>
+</ul>
+
+
+
+
+<%- include('footer') %>
