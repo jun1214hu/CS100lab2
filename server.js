@@ -77,18 +77,15 @@ app.get('/object/:objectnumber', function(req, res) {
 // behavior after posting a comment
 app.post('/object/:objectnumber', function (req, res) {
     let {username, comment} = req.body;
-    if (username && comment) {
+    if (username || comment) {
             NAMES.push({
                 objectNumber: req.params.objectnumber,
                 username: username,
                 comment: [comment]
             });
         }
-        else alert("Please input a username and a comment");
         res.redirect(`/object/${req.params.objectnumber}`);
     });
-
-
 
 
 
