@@ -11,11 +11,12 @@ const app = express();
 const host = '127.0.0.1';
 const port = 3000;
 
-const NAMES = {
-    objectNumber: "P2003.239",
-    username: "username",
-    comment: ["this is comment 1","this is comment 2"],
-};
+const NAMES = [{
+    objectNumber: "",
+    username: "",
+    comment: [""]
+}];
+
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -68,21 +69,25 @@ app.get('/object/:objectnumber', function(req, res) {
     fetch(singleURL)
         .then(response => response.json())
         .then(data => {
-            res.render('singles', {singles: data.records, username: req.session['username'],
-                users: _.values(NAMES.comment)});
+            res.render('singles', {singles: data.records[0], username: req.session['username'],
+                users: NAMES});
         });
 });
 
 // behavior after posting a comment
 app.post('/object/:objectnumber', function (req, res) {
-
     let {username, comment} = req.body;
     if (username && comment) {
-        NAMES[req.params.objectnumber] = comment;
+            NAMES.push({
+                objectNumber: req.params.objectnumber,
+                username: username,
+                comment: [comment]
+            });
+        }
+        else alert("Please input a username and a comment");
         res.redirect(`/object/${req.params.objectnumber}`);
+    });
 
-    }
-});
 
 
 

@@ -19,7 +19,9 @@
                     <img src="<%- object.primaryimageurl%>" alt="<%- object.primaryimageurl%>" style="max-width:360px;">
                 </td>
                 <td>
-                        <%- object.people[0].name %>
+                        <% if (object.people !== undefined) { %>
+                    <%- object.people[0].name %>
+                    <% } %>
 
                 </td>
                 <td>

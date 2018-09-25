@@ -3,33 +3,37 @@
 <h1> Art Piece </h1>
 
 <ul>
-    <% singles.forEach(single => { %>
-            Title: <%- single.title %>
-        <br>
-        <img src="<%- single.primaryimageurl %>" style="max-width:360px;">
-        <br>
-            People: <%- single.people[0].name %>
 
-        <% }); %>
+    Title: <%- singles.title %>
+    <br>
+    <img src="<%- singles.primaryimageurl %>" style="max-width:360px;">
+    <br>
+    People: <%- singles.people[0].name %>
+
+
 </ul>
 
 <h4> Comments </h4>
+<!-- if the objectnumber of the art matches the objectbumber in the dictionary, then post the commnts -->
+<% for (var i = 0; i < users.length; i++) { %>
+    <% if (users[i].objectNumber === singles.objectnumber) { %>
+        <% for (var j = 0; j < users[i].comment.length; j++) { %>
+            <li>
+                <%- users[i].comment[j] %>
+            </li>
+            <br>
+        <% } %>
+    <% } %>
+<% } %>
+
+
+
+
 <ul>
-    <% users.forEach(function(user) { %>
-        <li> <%- user %> </li>
-   <% }); %>
-</ul>
-
-
-
-
-
-
-<ul>
-<% singles.forEach(single => { %>
+<!-- Post a comment form! -->
     <div id="respond">
         <h4> Leave a Comment </h4>
-        <form action="/object/<%- single.objectnumber%>" method="post" id="commentform">
+        <form action="/object/<%- singles.objectnumber%>" method="post" id="commentform">
             <p>
                 <label> Name: </label>
                 <input autocomplete="off" autofocus name="username" type="text">
@@ -43,7 +47,7 @@
             </p>
         </form>
     </div>
-<%  }); %>
+
 </ul>
 
 
